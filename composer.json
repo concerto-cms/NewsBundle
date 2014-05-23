@@ -1,0 +1,17 @@
+{
+    "name": "concerto-cms/news-bundle",
+    "description": "Newspage features for the Concerto CMS software",
+    "authors": [
+        {
+            "name": "Mathieu Maes",
+            "email": "mathieu@webberig.be"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "ConcertoCms\\NewsBundle": "" }
+    },
+    "target-dir": "ConcertoCms/NewsBundle",
+    "require": {
+
+    }
+}
