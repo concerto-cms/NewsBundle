@@ -5,3 +5,15 @@ services:
 #    concerto_cms_news.example:
 #        class: %concerto_cms_news.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+     concerto_cms_news.pagemanager.newsitem:
+         class: ConcertoCms\NewsBundle\PageManager\NewsItem
+         tags:
+            - { name: concerto.pagemanager}
+     concerto_cms_news.pagemanager.newslist:
+         class: ConcertoCms\NewsBundle\PageManager\NewsList
+         tags:
+            - { name: concerto.pagemanager}
+     concerto_cms_news.extension:
+         class: ConcertoCms\NewsBundle\Service\Extension
+         tags:
+            - { name: concerto.extension }

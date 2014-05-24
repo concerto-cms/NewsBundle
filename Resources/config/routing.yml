@@ -1,3 +1,27 @@
-concerto_cms_news_homepage:
-    pattern:  /hello/{name}
+concerto_cms_news:
+    pattern:  /news
     defaults: { _controller: ConcertoCmsNewsBundle:Default:index }
+
+# API
+concerto_cms_news:
+    pattern:  /rest/news
+    defaults: { _controller: ConcertoCmsNewsBundle:Default:get }
+    methods:  [GET]
+
+concerto_cms_news_new:
+    pattern: /rest/news/{path}
+    defaults: { _controller: ConcertoCmsNewsBundle:Default:post }
+    requirements:
+        path:   .*
+    methods:  [POST]
+    options:
+        expose: true
+
+betec_backend_news_save:
+    pattern: /rest/news/{path}
+    defaults: { _controller: ConcertoCmsNewsBundle:Default:put }
+    methods:  [PUT]
+    requirements:
+        path:   .*
+    options:
+        expose: true
