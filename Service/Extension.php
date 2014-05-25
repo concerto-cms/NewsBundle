@@ -9,7 +9,10 @@
 namespace ConcertoCms\NewsBundle\Service;
 
 
-class Extension {
+use ConcertoCms\CoreBundle\Extension\ConcertoExtension;
+use Knp\Menu\MenuItem;
+
+class Extension extends ConcertoExtension {
     public function __construct()
     {
     }
@@ -23,5 +26,4 @@ class Extension {
             )
         );
     }
-
-} 
+}

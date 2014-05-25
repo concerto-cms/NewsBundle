@@ -3,12 +3,12 @@ concerto_cms_news:
     defaults: { _controller: ConcertoCmsNewsBundle:Default:index }
 
 # API
-concerto_cms_news:
+concerto_cms_news_rest:
     pattern:  /rest/news
     defaults: { _controller: ConcertoCmsNewsBundle:Default:get }
     methods:  [GET]
 
-concerto_cms_news_new:
+concerto_cms_news_rest_new:
     pattern: /rest/news/{path}
     defaults: { _controller: ConcertoCmsNewsBundle:Default:post }
     requirements:
@@ -17,7 +17,7 @@ concerto_cms_news_new:
     options:
         expose: true
 
-betec_backend_news_save:
+concerto_cms_news_rest_save:
     pattern: /rest/news/{path}
     defaults: { _controller: ConcertoCmsNewsBundle:Default:put }
     methods:  [PUT]
