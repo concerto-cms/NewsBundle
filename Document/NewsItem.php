@@ -15,8 +15,8 @@ use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\File;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-
-class NewsItem extends Page {
+class NewsItem extends Page
+{
     public function __construct()
     {
         $today = new \DateTime();
@@ -217,5 +217,4 @@ class NewsItem extends Page {
     {
         return false;
     }
-
-} 
+}

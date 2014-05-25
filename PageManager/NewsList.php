@@ -11,7 +11,8 @@ namespace ConcertoCms\NewsBundle\PageManager;
 
 use ConcertoCms\CoreBundle\PageManager\Page;
 
-class NewsList extends Page {
+class NewsList extends Page
+{
     public function create($params)
     {
         $page = new \ConcertoCms\NewsBundle\Document\NewsList();
@@ -43,4 +44,4 @@ class NewsList extends Page {
     {
         return array();
     }
-} 
+}

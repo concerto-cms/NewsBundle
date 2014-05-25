@@ -13,7 +13,9 @@ services:
          class: ConcertoCms\NewsBundle\PageManager\NewsList
          tags:
             - { name: concerto.pagemanager}
-     concerto_cms_news.extension:
-         class: ConcertoCms\NewsBundle\Service\Extension
+     concerto_cms_news.extension.mainmenu:
+         class: ConcertoCms\NewsBundle\Extension\MainMenuListener
          tags:
-            - { name: concerto.extension }
+            - name: kernel.event_listener
+              event: concerto.menu.main.build
+              method: onBuild

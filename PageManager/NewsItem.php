@@ -5,11 +5,10 @@
  * Date: 24/05/14
  * Time: 8:34
  */
-
 namespace ConcertoCms\NewsBundle\PageManager;
 
-
-class NewsItem extends NewsList {
+class NewsItem extends NewsList
+{
     /**
      * @param object $document
      * @param array $params
@@ -62,5 +61,4 @@ class NewsItem extends NewsList {
     {
         return "News item";
     }
-
-} 
+}

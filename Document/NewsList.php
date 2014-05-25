@@ -5,9 +5,7 @@
  * Date: 24/05/14
  * Time: 8:33
  */
-
 namespace ConcertoCms\NewsBundle\Document;
-
 
 use ConcertoCms\CoreBundle\Document\Page;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
@@ -15,7 +13,8 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class NewsList extends Page {
+class NewsList extends Page
+{
     public function getClassname()
     {
         return "ConcertoCmsNewsBundle:NewsList";
@@ -54,7 +53,7 @@ class NewsList extends Page {
                  * @var NewsItem $b
                  */
                 return ($a->getDate() < $b->getDate()) ? -1 : 1;
-            });
+        });
         return $news;
     }
 
@@ -66,4 +65,4 @@ class NewsList extends Page {
     {
         return true;
     }
-} 
+}
