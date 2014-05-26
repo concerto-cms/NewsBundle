@@ -1,0 +1,12 @@
+{% extends 'ConcertoCmsCoreBundle:_Layouts:base.html.twig' %}
+{% block title %}Browse content{% endblock %}
+
+{% block content %}
+    <div id="contentContainer">
+        {% for page in news %}
+            {{ page.id }} - {{ page.title }}<br />
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

@@ -11,16 +11,7 @@ class NewsController extends Controller
     public function indexAction()
     {
         $pages = $this->getNewsService()->getNewsPages();
-        /**
-         * @var $page NewsList
-         */
-        foreach ($pages as $page)
-        {
-            echo $page->getId() . "<br />";
-        }
-
-
-        return $this->render('ConcertoCmsNewsBundle:News:index.html.twig', array('name' => $name));
+        return $this->render('ConcertoCmsNewsBundle:News:index.html.twig', array('news' => $pages));
     }
 
     /**
