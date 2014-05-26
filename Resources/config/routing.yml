@@ -1,16 +1,16 @@
 concerto_cms_news:
     pattern:  /news
-    defaults: { _controller: ConcertoCmsNewsBundle:Default:index }
+    defaults: { _controller: ConcertoCmsNewsBundle:News:index }
 
 # API
 concerto_cms_news_rest:
     pattern:  /rest/news
-    defaults: { _controller: ConcertoCmsNewsBundle:Default:get }
+    defaults: { _controller: ConcertoCmsNewsBundle:News:get }
     methods:  [GET]
 
 concerto_cms_news_rest_new:
     pattern: /rest/news/{path}
-    defaults: { _controller: ConcertoCmsNewsBundle:Default:post }
+    defaults: { _controller: ConcertoCmsNewsBundle:News:post }
     requirements:
         path:   .*
     methods:  [POST]
@@ -19,7 +19,7 @@ concerto_cms_news_rest_new:
 
 concerto_cms_news_rest_save:
     pattern: /rest/news/{path}
-    defaults: { _controller: ConcertoCmsNewsBundle:Default:put }
+    defaults: { _controller: ConcertoCmsNewsBundle:News:put }
     methods:  [PUT]
     requirements:
         path:   .*
