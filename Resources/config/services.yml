@@ -5,12 +5,12 @@ services:
      concerto_cms_news.news:
          class: ConcertoCms\NewsBundle\Service\News
          arguments: [@doctrine_phpcr.odm.default_document_manager]
-     concerto_cms_news.pagemanager.newsitem:
-         class: ConcertoCms\NewsBundle\PageManager\NewsItem
-         tags:
-            - { name: concerto.pagemanager}
-     concerto_cms_news.pagemanager.newslist:
-         class: ConcertoCms\NewsBundle\PageManager\NewsList
+#     concerto_cms_news.pagemanager.newsitem:
+#         class: ConcertoCms\NewsBundle\PageManager\NewsItem
+#         tags:
+#            - { name: concerto.pagemanager}
+     concerto_cms_news.pagemanager:
+         class: ConcertoCms\NewsBundle\Service\PageManager
          tags:
             - { name: concerto.pagemanager}
      concerto_cms_news.extension.mainmenu:

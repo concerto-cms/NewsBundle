@@ -32,7 +32,7 @@ class NewsItem extends Page
     }
     public function getClassname()
     {
-        return "BetecWebsiteBundle:NewsItem";
+        return "ConcertoCmsNewsBundle:NewsItem";
     }
 
     public function jsonSerialize()
