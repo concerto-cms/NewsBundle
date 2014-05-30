@@ -5,7 +5,12 @@ Controller.News = function(options) {
         router;
 
     this.views = [];
+    this.categories = new Backbone.Collection(options.categories, {
+        model: Model.Route
+    });
     this.news = new Collection.News(options.news);
+    this.news.categories = this.categories;
+
     this.newsContainer = document.getElementById("newsContainer");
 
     // Setup router
@@ -34,7 +39,8 @@ _.extend(Controller.News.prototype, {
     },
     listAction: function() {
         var view = new View.NewsList({
-                news: this.news
+                news: this.news,
+                categories: this.categories
             });
         this.cleanup();
         $(this.newsContainer)
@@ -55,10 +61,13 @@ _.extend(Controller.News.prototype, {
         var view = new View.NewsItem({
             model: new Model.Page({
                 date: moment().format("DD-MM-YYYY"),
+                parent: this.categories.first().id,
+                type: 'ConcertoCmsNewsBundle:NewsItem',
                 publishStart: moment().format("DD-MM-YYYY"),
                 publishStop: moment().format("DD-MM-YYYY")
             }),
-            collection: this.news
+            collection: this.news,
+            categories: this.categories
         });
         this.cleanup();
         $(this.newsContainer)

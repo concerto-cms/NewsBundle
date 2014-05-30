@@ -11,18 +11,17 @@ class NewsController extends Controller
     public function indexAction()
     {
         $listpages = $this->getNewsService()->getNewsPages();
-        $routes = array();
+        $categories = array();
         $items = array();
         /**
          * @var $lp NewsList
          */
         foreach ($listpages as $lp) {
-            $route = $lp->getRoute();
-            $routes[] = $route;
-            $this->populatePageData($items, $route);
+            $categories[] = $lp;
+            $this->populatePageData($items, $lp->getRoute());
         }
 
-        return $this->render('ConcertoCmsNewsBundle:News:index.html.twig', array('lists' => $routes, "news" => $items));
+        return $this->render('ConcertoCmsNewsBundle:News:index.html.twig', array('categories' => $categories, "news" => $items));
     }
 
     /**
@@ -44,7 +43,7 @@ class NewsController extends Controller
          * @var $route RouteInterface
          */
         foreach ($children as $child) {
-            $pageData[] = $child;
+            $pageData[] = $child->getContent();
         }
     }
 }

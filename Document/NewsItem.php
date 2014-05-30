@@ -45,6 +45,7 @@ class NewsItem extends Page
         $data["published"] = $this->isPublished();
         $data["archived"] = $this->isArchived();
         $data["planned"] = $this->isPlanned();
+        $data["category"] = $this->getParent()->getId();
 
         return $data;
     }

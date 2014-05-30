@@ -1,12 +1,19 @@
 {% extends 'ConcertoCmsCoreBundle:_Layouts:base.html.twig' %}
-{% block title %}Browse content{% endblock %}
+{% block title %}Browse news items{% endblock %}
 
 {% block content %}
-    <div id="contentContainer">
-        {% for page in news %}
-            {{ page.id }} - {{ page.title }}<br />
-        {% endfor %}
+    <div id="newsContainer">
     </div>
 {% endblock %}
 {% block javascripts %}
+    <script src="{{ asset('js/templates.news.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('ckeditor/adapters/jquery.js') }}"></script>
+    <script>
+        window.controller = new Controller.News({
+            categories: {{ categories|json_encode|raw }},
+            news: {{ news|json_encode|raw }}
+        });
+    </script>
 {% endblock %}

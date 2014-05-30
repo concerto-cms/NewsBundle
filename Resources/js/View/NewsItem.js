@@ -6,11 +6,6 @@ View.NewsItem = Backbone.View.extend({
         _.extend(this, options);
         this.original_model = options.model;
         this.model = options.model.clone();
-        if (options.model.has('id')) {
-            this.original_model.url = Routing.generate('concerto_cms_core_content_rest', {path: this.model.getId()});
-        } else {
-            this.original_model.url = Routing.generate('concerto_cms_core_content_rest', {path: 'en/news'});
-        }
 
         this.listenTo(this.original_model, "change:id", function() {
             this.collection.add(this.original_model);
@@ -65,9 +60,16 @@ View.NewsItem = Backbone.View.extend({
 
     },
     save: function() {
+        var parent;
         this.$("button.save").attr("disabled", "disabled").addClass("disabled");
+        if (this.model.has('id')) {
+            this.original_model.url = Routing.generate('concerto_cms_core_content_rest', {path: this.model.getId()});
+        } else {
+            parent = this.categories.get(this.model.get('parent'));
+            this.original_model.url = Routing.generate('concerto_cms_core_content_rest', {path: parent.getId()});
+        }
+
         this.original_model.set(this.model.attributes).save();
         this.listenToOnce(this.model, "change", this.onChange);
     }
-
 });

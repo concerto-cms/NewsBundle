@@ -65,6 +65,10 @@ class PageManager implements PageManagerInterface
                         break;
                 }
             }
+
+            $urlString = $document->getDate()->format("d-m-Y") . "_" . $document->getTitle();
+            $slug = \Ferrandini\Urlizer::urlize($urlString);
+            $document->setSlug($slug);
         }
     }
 
