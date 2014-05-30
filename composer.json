@@ -12,6 +12,6 @@
     },
     "target-dir": "ConcertoCms/NewsBundle",
     "require": {
-
+        "aferrandini/urlizer": "dev-master"
     }
 }
