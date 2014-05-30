@@ -21,7 +21,10 @@ class NewsController extends Controller
             $this->populatePageData($items, $lp->getRoute());
         }
 
-        return $this->render('ConcertoCmsNewsBundle:News:index.html.twig', array('categories' => $categories, "news" => $items));
+        return $this->render(
+            'ConcertoCmsNewsBundle:News:index.html.twig',
+            array('categories' => $categories, "news" => $items)
+        );
     }
 
     /**
