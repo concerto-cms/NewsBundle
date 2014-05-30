@@ -13,6 +13,6 @@
     "target-dir": "ConcertoCms/NewsBundle",
     "minimum-stability": "RC",
     "require": {
-        "aferrandini/urlizer": "dev-master"
+        "aferrandini/urlizer": "1.0.*"
     }
 }
