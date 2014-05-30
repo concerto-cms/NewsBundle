@@ -11,6 +11,7 @@
         "psr-0": { "ConcertoCms\\NewsBundle": "" }
     },
     "target-dir": "ConcertoCms/NewsBundle",
+    "minimum-stability": "RC",
     "require": {
         "aferrandini/urlizer": "dev-master"
     }
