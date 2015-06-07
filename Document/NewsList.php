@@ -7,30 +7,14 @@
  */
 namespace ConcertoCms\NewsBundle\Document;
 
-use ConcertoCms\CoreBundle\Document\Page;
+use ConcertoCms\CoreBundle\Document\SimplePage;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class NewsList extends Page
+class NewsList extends SimplePage
 {
-    public function getClassname()
-    {
-        return "ConcertoCmsNewsBundle:NewsList";
-    }
-
-    public function jsonSerialize()
-    {
-        $data = parent::jsonSerialize();
-
-        return $data;
-    }
-
-    public function getChildren()
-    {
-        return array();
-    }
     public function getItems($publishedOnly = true)
     {
         $children = $this->children;
@@ -55,14 +39,5 @@ class NewsList extends Page
                 return ($a->getDate() < $b->getDate()) ? -1 : 1;
         });
         return $news;
-    }
-
-    public function showChildrenInList()
-    {
-        return false;
-    }
-    public function showInList()
-    {
-        return true;
     }
 }

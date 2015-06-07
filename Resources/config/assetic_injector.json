@@ -1,0 +1,9 @@
+{
+  "require_all":
+  {
+    "javascripts":
+    {
+      "concerto.pages": "@ConcertoCmsNewsBundle/Resources/js/Pages/*.js"
+    }
+  }
+}

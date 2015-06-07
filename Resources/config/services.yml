@@ -2,20 +2,22 @@ parameters:
 #    concerto_cms_news.example.class: ConcertoCms\NewsBundle\Example
 
 services:
-     concerto_cms_news.news:
-         class: ConcertoCms\NewsBundle\Service\News
-         arguments: [@doctrine_phpcr.odm.default_document_manager]
+    concerto_cms_news.newsmanager:
+       class: ConcertoCms\NewsBundle\Service\NewsManager
+       arguments: [@doctrine_phpcr.odm.default_document_manager]
 #     concerto_cms_news.pagemanager.newsitem:
 #         class: ConcertoCms\NewsBundle\PageManager\NewsItem
 #         tags:
 #            - { name: concerto.pagemanager}
-     concerto_cms_news.pagemanager:
-         class: ConcertoCms\NewsBundle\Service\PageManager
-         tags:
-            - { name: concerto.pagemanager}
-     concerto_cms_news.extension.mainmenu:
-         class: ConcertoCms\NewsBundle\Extension\MainMenuListener
-         tags:
-            - name: kernel.event_listener
-              event: concerto.menu.main.build
-              method: onBuild
+    concerto_cms_news.pages.factory.newslist:
+        class: ConcertoCms\CoreBundle\Pages\Service\GenericPageFactory
+        arguments:
+            - @doctrine_phpcr.odm.default_document_manager
+            - ConcertoCms\CoreBundle\Document\NewsList
+        tags:
+            -  { name: concerto.pagefactory, alias: newslist }
+
+    concerto_cms_news.listener.menu_builder:
+        class: ConcertoCms\NewsBundle\Menu\MenuBuilder
+        tags:
+            - { name: kernel.event_listener, event: concerto_cms_admin.menu_configure, method: onMenuBuild }

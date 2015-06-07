@@ -8,14 +8,14 @@
 
 namespace ConcertoCms\NewsBundle\Document;
 
-use ConcertoCms\CoreBundle\Document\Page;
+use ConcertoCms\CoreBundle\Document\SimplePage;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\File;
 
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class NewsItem extends Page
+class NewsItem extends SimplePage
 {
     public function __construct()
     {
@@ -29,10 +29,6 @@ class NewsItem extends Page
         if ($this->getPublishStop() === null) {
             $this->setPublishStop($today->add(new \DateInterval("P1Y")));
         }
-    }
-    public function getClassname()
-    {
-        return "ConcertoCmsNewsBundle:NewsItem";
     }
 
     public function jsonSerialize()
@@ -49,28 +45,6 @@ class NewsItem extends Page
 
         return $data;
     }
-
-    public function set($params)
-    {
-        foreach ($params as $key => $value) {
-            switch ($key) {
-                case 'introduction':
-                    $this->setIntroduction($value);
-                    break;
-                case 'date':
-                    $this->setDate($value);
-                    break;
-                case 'publishStop':
-                    $this->setPublishStop($value);
-                    break;
-                case 'publishStart':
-                    $this->setPublishStart($value);
-                    break;
-            }
-        }
-        return parent::set($params);
-    }
-
 
     /**
      * @PHPCR\Date()
@@ -203,19 +177,6 @@ class NewsItem extends Page
         if ($this->getPublishStart() >= $today) {
             return true;
         }
-        return false;
-    }
-    public function getVisibleSubpages()
-    {
-        return array();
-    }
-
-    public function showChildrenInList()
-    {
-        return false;
-    }
-    public function showInList()
-    {
         return false;
     }
 }
