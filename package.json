@@ -1,0 +1,25 @@
+{
+  "name": "ConcertoCmsNewsBundle",
+  "version": "0.0.1",
+  "description": "Concerto Cms News bundle\r ==========================",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concerto-cms/NewsBundle.git"
+  },
+  "keywords": [
+    "symfony",
+    "cms"
+  ],
+  "author": "Mathieu Maes",
+  "license": "GPL",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-twig": "^0.1.3"
+  }
+}

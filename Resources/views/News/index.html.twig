@@ -1,19 +1,26 @@
-{% extends 'ConcertoCmsCoreBundle:_Layouts:base.html.twig' %}
-{% block title %}Browse news items{% endblock %}
-
-{% block content %}
-    <div id="newsContainer">
-    </div>
+{% extends 'ConcertoCmsAdminBundle::base.html.twig' %}
+{% block body %}
+    {% include '@ConcertoCmsAdmin/_Partials/header.html.twig' %}
+    <div id="news-container"></div>
 {% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('js/templates.news.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('ckeditor/adapters/jquery.js') }}"></script>
+{% block javascript %}
+    {% javascripts
+    '@ConcertoCmsNewsBundle/Resources/js/Model/*.js'
+    '@ConcertoCmsNewsBundle/Resources/js/Collection/*.js'
+    '@ConcertoCmsNewsBundle/Resources/js/News/*.js'
+    '@ConcertoCmsNewsBundle/Resources/public/js/templates.news.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% include '@ConcertoCmsAdmin/_Partials/ckeditor.html.twig' %}
+
+    {{ render(controller('ConcertoCmsAdminBundle:Pages:pagetypes')) }}
+
     <script>
-        window.controller = new Controller.News({
-            categories: {{ categories|json_encode|raw }},
-            news: {{ news|json_encode|raw }}
+        controller = new Pages.Controller({
+            el: document.getElementById("news-container")
         });
     </script>
+
 {% endblock %}
