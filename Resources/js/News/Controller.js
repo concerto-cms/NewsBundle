@@ -1,6 +1,6 @@
-var Controller = Controller || {};
+News = News || {};
 
-Controller.News = function(options) {
+News.Controller = function(options) {
     var that = this,
         router;
 
@@ -15,17 +15,7 @@ Controller.News = function(options) {
 
     // Setup router
     _.bindAll(this, "listAction", "editAction", "newAction");
-    router = Backbone.Router.extend({
-        routes: {
-            "":             "list",
-            "edit/:item":   "edit",
-            "new":          "new"
-        },
-        list: this.listAction,
-        edit: this.editAction,
-        new: this.newAction
 
-    });
     this.router = new router();
     Backbone.history.start()
 };

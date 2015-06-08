@@ -13,7 +13,7 @@ services:
         class: ConcertoCms\CoreBundle\Pages\Service\GenericPageFactory
         arguments:
             - @doctrine_phpcr.odm.default_document_manager
-            - ConcertoCms\CoreBundle\Document\NewsList
+            - ConcertoCms\NewsBundle\Document\NewsList
         tags:
             -  { name: concerto.pagefactory, alias: newslist }
 

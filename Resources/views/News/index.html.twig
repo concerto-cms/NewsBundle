@@ -15,10 +15,8 @@
 
     {% include '@ConcertoCmsAdmin/_Partials/ckeditor.html.twig' %}
 
-    {{ render(controller('ConcertoCmsAdminBundle:Pages:pagetypes')) }}
-
     <script>
-        controller = new Pages.Controller({
+        controller = new News.Controller({
             el: document.getElementById("news-container")
         });
     </script>

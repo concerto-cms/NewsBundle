@@ -1,3 +1,3 @@
 concerto_cms_news:
     pattern:  /news
-    defaults: { _controller: ConcertoCmsNewsBundle:Admin:index }
+    defaults: { _controller: ConcertoCmsNewsBundle:News:index }

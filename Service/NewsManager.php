@@ -38,16 +38,20 @@ class NewsManager
         return $query->execute();
     }
 
-    public function getAllNewsItems()
+    public function getAllNewsItems($pages = null)
     {
-        $pages = $this->getNewsPages();
+        if (!$pages) {
+            $pages = $this->getNewsPages();
+        }
         $newsitems = [];
         /**
          * @var $newslist NewsList
          */
         foreach ($pages as $newslist)
         {
-            array_merge($newsitems, $newslist->getItems(false));
+            $page = $newslist->jsonSerialize();
+            $page["newsitems"] = $newslist->getItems(false);
+            $newsitems[] = $page;
         }
         return $newsitems;
     }
