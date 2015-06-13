@@ -19,5 +19,16 @@ Model.NewsItem = Backbone.Model.extend({
     },
     getId: function() {
         return this.get('id').replace("/cms/pages/", "");
+    },
+    set: function(attrs, options) {
+        if (typeof attrs == "object" && attrs.id) {
+            arguments[0].id = attrs.id.replace("/cms/pages/", "");
+        }
+        Backbone.Model.prototype.set.apply(this, arguments);
+    },
+
+    url: function() {
+        return Routing.generate('concerto_cms_core_pages_rest_get', {path: this.id});
     }
-})
+
+});

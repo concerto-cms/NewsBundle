@@ -1,6 +1,6 @@
-var View = View || {};
+var News = News || {};
 
-View.NewsItem = Backbone.View.extend({
+News.ItemView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
         _.extend(this, options);
@@ -38,14 +38,25 @@ View.NewsItem = Backbone.View.extend({
         var editor1, editor2,
             that = this;
         this.el.innerHTML = window.JST["news.item.html.twig"].render(this);
-        editor1 = this.$("#news_introduction").ckeditor().data("ckeditorInstance");
-        editor1.on( 'change', function(e) {
-            that.$("#news_introduction").trigger("change");
-        });
-        editor2 = this.$("#news_content").ckeditor().data("ckeditorInstance");
-        editor2.on( 'change', function(e) {
-            that.$("#news_content").trigger("change");
-        });
+
+        setTimeout(_.bind(function() {
+            editor1 = this.$("[name=introduction]").ckeditor({
+                customConfig: ''
+            }).data("ckeditorInstance");
+            editor1.on( 'change', _.bind(function(e) {
+                this.$("[name=introduction]").trigger("change");
+            }, this));
+            editor2 = this.$("[name=content]").ckeditor({
+                customConfig: ''
+            }).data("ckeditorInstance");
+            editor2.on( 'change', _.bind(function(e) {
+                this.$("[name=content]").trigger("change");
+            }, this));
+
+        }, this), 200);
+
+
+
         this.stickit();
         this.$("input.datepicker").datepicker({
             format: "dd-mm-yyyy"
@@ -60,16 +71,7 @@ View.NewsItem = Backbone.View.extend({
 
     },
     save: function() {
-        var parent;
-        this.$("button.save").attr("disabled", "disabled").addClass("disabled");
-        if (this.model.has('id')) {
-            this.original_model.url = Routing.generate('concerto_cms_core_content_rest', {path: this.model.getId()});
-        } else {
-            parent = this.categories.get(this.model.get('parent'));
-            this.original_model.url = Routing.generate('concerto_cms_core_content_rest', {path: parent.getId()});
-        }
-
-        this.original_model.set(this.model.attributes).save();
-        this.listenToOnce(this.model, "change", this.onChange);
+        this.original_model.set(this.model.attributes);
+        this.trigger("save");
     }
 });

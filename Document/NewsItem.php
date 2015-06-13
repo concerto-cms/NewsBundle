@@ -42,6 +42,8 @@ class NewsItem extends SimplePage
         $data["archived"] = $this->isArchived();
         $data["planned"] = $this->isPlanned();
         $data["category"] = $this->getParent()->getId();
+        $data["type"] = "newsitem";
+        unset($data["routes"]);
 
         return $data;
     }

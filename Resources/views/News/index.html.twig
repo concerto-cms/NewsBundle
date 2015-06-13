@@ -6,8 +6,11 @@
 {% block javascript %}
     {% javascripts
     '@ConcertoCmsNewsBundle/Resources/js/Model/*.js'
+    '@ConcertoCmsAdminBundle/Resources/js/Model/Page.js'
     '@ConcertoCmsNewsBundle/Resources/js/Collection/*.js'
+    '@ConcertoCmsNewsBundle/Resources/js/News/Router.js'
     '@ConcertoCmsNewsBundle/Resources/js/News/*.js'
+    'bundles/concertocmsadmin/js/templates.admin.js'
     '@ConcertoCmsNewsBundle/Resources/public/js/templates.news.js'
     %}
     <script src="{{ asset_url }}"></script>

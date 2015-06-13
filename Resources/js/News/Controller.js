@@ -1,67 +1,62 @@
-News = News || {};
+var News = News || {};
 
 News.Controller = function(options) {
-    var that = this,
-        router;
+    _.extend(this, options);
+    this.$el = $(this.el);
 
-    this.views = [];
-    this.categories = new Backbone.Collection(options.categories, {
-        model: Model.Route
-    });
-    this.news = new Collection.News(options.news);
-    this.news.categories = this.categories;
-
-    this.newsContainer = document.getElementById("newsContainer");
-
-    // Setup router
-    _.bindAll(this, "listAction", "editAction", "newAction");
-
-    this.router = new router();
-    Backbone.history.start()
+    $.when(this.loadNews())
+        .done(_.bind(function() {
+            this.router = new News.Router();
+            this.listenTo(this.router, "route:index", this.indexAction);
+            this.listenTo(this.router, "route:edit", this.editAction);
+            Backbone.history.start();
+        }, this));
 };
-_.extend(Controller.News.prototype, Backbone.Events);
-_.extend(Controller.News.prototype, {
-    cleanup: function() {
-        _.each(this.views, function(view) {
-            view.remove();
-        });
-        this.views = [];
-    },
-    listAction: function() {
-        var view = new View.NewsList({
-                news: this.news,
-                categories: this.categories
-            });
-        this.cleanup();
-        $(this.newsContainer)
-            .append(view.$el);
-        this.views.push(view);
-    },
-    editAction: function(item) {
-        var view = new View.NewsItem({
-            model: this.news.findWhere({slug: item}),
+_.extend(News.Controller.prototype, Backbone.Events);
+_.extend(News.Controller.prototype, {
+    indexAction: function() {
+        var view = new News.ListView({
             collection: this.news
         });
-        this.cleanup();
-        $(this.newsContainer)
-            .append(view.$el);
-        this.views.push(view);
+        this.setView(view);
+
     },
-    newAction: function() {
-        var view = new View.NewsItem({
-            model: new Model.Page({
-                date: moment().format("DD-MM-YYYY"),
-                parent: this.categories.first().id,
-                type: 'ConcertoCmsNewsBundle:NewsItem',
-                publishStart: moment().format("DD-MM-YYYY"),
-                publishStop: moment().format("DD-MM-YYYY")
-            }),
-            collection: this.news,
-            categories: this.categories
+    editAction: function(parent, slug) {
+        var page = this.news.get('/cms/pages/' + parent),
+            model = page.getItem(slug);
+        if (!page) {
+            this.indexAction();
+            return;
+        }
+        var view = new News.ItemView({
+            page: page,
+            model: model
         });
-        this.cleanup();
-        $(this.newsContainer)
-            .append(view.$el);
-        this.views.push(view);
+        this.listenTo(view, "save", function() {
+            model.save();
+            this.router.navigate("/", {trigger: true});
+        });
+
+        this.setView(view);
+
+
+    },
+    loadNews: function() {
+        var that = this;
+        return $.getJSON(Routing.generate("concerto_cms_news_api"))
+            .done(function(data) {
+                that.news = new Collection.NewsLists(data);
+            });
+
+    },
+
+    setView: function(view) {
+        if (this.view) {
+            this.stopListening(this.view);
+            this.view.remove();
+        }
+        this.view = view;
+        this.$el.html("").append(view.$el);
+        view.render();
     }
 });

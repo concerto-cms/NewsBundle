@@ -1,0 +1,19 @@
+{% extends 'layout-modal.html.twig' %}
+{% block title %}Add an item to category "{{ page.get('title') }}"{% endblock %}
+{% block body %}
+    <div class="form-group">
+        <label for="frmNewItemDialog_title">Title</label>
+        <input type="text" class="form-control" id="frmNewItemDialog_title" placeholder="Page title" name="title" required />
+    </div>
+    <div class="form-group">
+        <label for="frmNewItemDialog_slug">Url</label>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="frmNewItemDialog_slug_addon">{{ page.getId() }}/</span>
+            <input type="text" name="slug" class="form-control" placeholder="Slug" aria-describedby="frmNewItemDialog_slug_addon">
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <button type="submit" class="btn btn-lg btn-success">Create</button>
+{% endblock %}

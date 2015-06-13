@@ -1,5 +1,5 @@
 var Collection = Collection || {};
 
-Collection.News = Backbone.Collection.extend({
+Collection.NewsItems = Backbone.Collection.extend({
     model: Model.NewsItem
 });

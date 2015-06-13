@@ -1,7 +1,7 @@
-News = News || {};
+var News = News || {};
 News.Router = Backbone.Router.extend({
     routes: {
         "": "index",
-        "*path": "edit"
+        "*parent/:slug": "edit"
     }
 });
