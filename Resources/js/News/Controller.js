@@ -23,11 +23,12 @@ _.extend(News.Controller.prototype, {
     },
     editAction: function(parent, slug) {
         var page = this.news.get('/cms/pages/' + parent),
-            model = page.getItem(slug);
+            model;
         if (!page) {
             this.indexAction();
             return;
         }
+        model = page.getItem(slug);
         var view = new News.ItemView({
             page: page,
             model: model

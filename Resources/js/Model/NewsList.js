@@ -7,12 +7,16 @@ Model.NewsList = Backbone.Model.extend({
     initialize: function() {
     },
     getItems: function() {
-        return new Collection.NewsItems(this.get("newsitems"));
+        if (typeof this.newsItems === "undefined") {
+            this.newsItems = new Collection.NewsItems(this.get("newsitems"));
+            this.listenTo(this.newsItems, "change update", function() {
+                this.set("newsitems", this.newsItems.toJSON());
+            })
+        }
+        return this.newsItems;
     },
     addItem: function(model) {
-        var items = this.get("newsitems") || [];
-        items.push(model);
-        this.set("newsitems", items);
+        this.getItems().add(model);
     },
     getId: function() {
         return this.get('id').replace("/cms/pages/", "");

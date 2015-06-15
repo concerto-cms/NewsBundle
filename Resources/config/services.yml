@@ -18,10 +18,7 @@ services:
             -  { name: concerto.pagefactory, alias: newslist }
 
     concerto_cms_news.pages.factory.newsitem:
-        class: ConcertoCms\CoreBundle\Pages\Service\GenericPageFactory
-        arguments:
-            - @doctrine_phpcr.odm.default_document_manager
-            - ConcertoCms\NewsBundle\Document\NewsItem
+        class: ConcertoCms\NewsBundle\Service\NewsItemFactory
         tags:
             -  { name: concerto.pagefactory, alias: newsitem }
 
