@@ -20,14 +20,16 @@ class NewsItem extends SimplePage
     public function __construct()
     {
         $today = new \DateTime();
+        $start = new \DateTime();
+        $stop = new \DateTime();
         if ($this->getDate() === null) {
             $this->setDate($today);
         }
         if ($this->getPublishStart() === null) {
-            $this->setPublishStart($today->add(new \DateInterval("P1D")));
+            $this->setPublishStart($start->add(new \DateInterval("P1D")));
         }
         if ($this->getPublishStop() === null) {
-            $this->setPublishStop($today->add(new \DateInterval("P1Y")));
+            $this->setPublishStop($stop->add(new \DateInterval("P1Y")));
         }
     }
 
