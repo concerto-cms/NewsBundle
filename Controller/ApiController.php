@@ -6,6 +6,7 @@ use ConcertoCms\NewsBundle\Document\NewsList;
 use ConcertoCms\NewsBundle\Service\NewsManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends Controller
 {
@@ -20,5 +21,16 @@ class ApiController extends Controller
     public function indexAction()
     {
         return new JsonResponse($this->getNewsService()->getAllNewsItems());
+    }
+
+    public function uploadAction(Request $request)
+    {
+        $imageHelper = $this->get("cmf_media.persistence.phpcr.upload_image_helper");
+        $imageHelper->setRootPath("/cms/media/shared");
+        $file = $request->files->get("file");
+        $doc = $imageHelper->handleUploadedFile($file);
+        return $imageHelper->getUploadResponse($request);
+
+
     }
 }

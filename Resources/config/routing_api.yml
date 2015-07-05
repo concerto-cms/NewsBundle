@@ -2,3 +2,9 @@ concerto_cms_news_api:
     pattern:  /news
     defaults: { _controller: ConcertoCmsNewsBundle:Api:index }
     options: { expose: true }
+
+concerto_cms_news_api_upload:
+    pattern:  /news/upload
+    methods: [POST]
+    defaults: { _controller: ConcertoCmsNewsBundle:Api:upload }
+    options: { expose: true }

@@ -2,6 +2,13 @@ parameters:
 #    concerto_cms_news.example.class: ConcertoCms\NewsBundle\Example
 
 services:
+    concerto_cms_news.phpcr.initializer:
+        class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
+        arguments:
+            - concerto_cms_core.phpcr.initializer
+            - [ "/cms/media/news" ]
+        tags:
+            - { name: doctrine_phpcr.initializer }
     concerto_cms_news.newsmanager:
        class: ConcertoCms\NewsBundle\Service\NewsManager
        arguments: [@doctrine_phpcr.odm.default_document_manager]
