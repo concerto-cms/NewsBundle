@@ -11,7 +11,9 @@ services:
             - { name: doctrine_phpcr.initializer }
     concerto_cms_news.newsmanager:
        class: ConcertoCms\NewsBundle\Service\NewsManager
-       arguments: [@doctrine_phpcr.odm.default_document_manager]
+       arguments:
+            - @doctrine_phpcr.odm.default_document_manager
+            - @cmf_media.upload_image_helper
 #     concerto_cms_news.pagemanager.newsitem:
 #         class: ConcertoCms\NewsBundle\PageManager\NewsItem
 #         tags:

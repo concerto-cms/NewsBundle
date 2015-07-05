@@ -34,6 +34,21 @@ News.ItemView = Backbone.View.extend({
         '[name=title]':         'title'
     },
 
+    showImage: function() {
+        var container = this.$(".img-container"),
+            img = $("<img />"),
+            url;
+
+        container.html("");
+        if (this.model.has("image")) {
+            url = Routing.generate('concerto_cms_news.thumbnail', {
+                path: this.model.get("image")
+            });
+            img.attr("src", url);
+            container.append(img);
+        }
+    },
+
     render: function() {
         var editor1, editor2,
             that = this;
@@ -61,13 +76,16 @@ News.ItemView = Backbone.View.extend({
         this.$("input.datepicker").datepicker({
             format: "dd-mm-yyyy"
         });
+        this.showImage();
         $('#fileupload').fileupload({
             url: Routing.generate('concerto_cms_news_api_upload'),
             dataType: 'json',
+            formData: {
+                id: this.model.getId()
+            },
             done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo('#files');
-                });
+                that.model.set("image", data.result.image);
+                that.showImage();
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);

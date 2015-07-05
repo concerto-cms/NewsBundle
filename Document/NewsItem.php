@@ -46,9 +46,15 @@ class NewsItem extends SimplePage
         $data["category"] = $this->getParent()->getId();
         $data["type"] = "newsitem";
         unset($data["routes"]);
+        if ($this->getImage())  {
+            $data["image"] = $this->getImage()->getId();
+        }
 
         return $data;
     }
+
+    /** @PHPCR\ReferenceOne(strategy="weak") */
+    private $image;
 
     /**
      * @PHPCR\Date()
@@ -183,4 +189,21 @@ class NewsItem extends SimplePage
         }
         return false;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
 }

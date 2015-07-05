@@ -9,21 +9,27 @@
 namespace ConcertoCms\NewsBundle\Service;
 
 
+use ConcertoCms\NewsBundle\Document\NewsItem;
 use ConcertoCms\NewsBundle\Document\NewsList;
+use Symfony\Cmf\Bundle\MediaBundle\File\UploadFileHelperDoctrine;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class NewsManager
 {
     use \ConcertoCms\CoreBundle\Util\DocumentManagerTrait;
 
     private $pm;
+    private $imageHelper;
 
     /**
      * @param $dm \Doctrine\ODM\PHPCR\DocumentManager
      */
     public function __construct(
-        \Doctrine\ODM\PHPCR\DocumentManager $dm
+        \Doctrine\ODM\PHPCR\DocumentManager $dm,
+        UploadFileHelperDoctrine $imageHelper
     ) {
         $this->setDocumentManager($dm);
+        $this->imageHelper = $imageHelper;
     }
 
 
@@ -54,5 +60,19 @@ class NewsManager
             $newsitems[] = $page;
         }
         return $newsitems;
+    }
+    public function setImage(NewsItem $item, UploadedFile $file)
+    {
+        if ($image = $item->getImage()) {
+            $this->getDocumentManager()->remove($image);
+            $item->setImage(null);
+        }
+
+        $this->imageHelper->setRootPath("/cms/media/news");
+        $imgDocument = $this->imageHelper->handleUploadedFile($file);
+        $this->getDocumentManager()->persist($imgDocument);
+        $item->setImage($imgDocument);
+        $this->getDocumentManager()->flush();
+        return $imgDocument;
     }
 }

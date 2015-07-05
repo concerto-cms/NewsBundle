@@ -1,3 +1,21 @@
 concerto_cms_news:
     pattern:  /news
     defaults: { _controller: ConcertoCmsNewsBundle:News:index }
+
+concerto_cms_news.image:
+    pattern:  /news/image/{path}
+    defaults: { _controller: cmf_media.image_controller:displayAction }
+    methods: [GET]
+    options: {expose: true}
+    requirements:
+        path: .*
+
+concerto_cms_news.thumbnail:
+    pattern:  /news/thumbnail/{path}
+    options: {expose: true}
+    defaults:
+        _controller: liip_imagine.controller:filterAction
+        filter: image_upload_thumbnail
+    methods: [GET]
+    requirements:
+        path: .*
