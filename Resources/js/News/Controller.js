@@ -34,7 +34,6 @@ _.extend(News.Controller.prototype, {
             model: model
         });
         this.listenTo(view, "save", function() {
-            model.save();
             this.router.navigate("/", {trigger: true});
         });
 

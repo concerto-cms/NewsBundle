@@ -105,7 +105,10 @@ News.ItemView = Backbone.View.extend({
 
     },
     save: function() {
+        var that = this;
         this.original_model.set(this.model.attributes);
-        this.trigger("save");
+        this.original_model.save().done(function() {
+            that.trigger("save");
+        });
     }
 });
