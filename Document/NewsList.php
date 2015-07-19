@@ -15,7 +15,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
  */
 class NewsList extends SimplePage
 {
-    public function getItems($publishedOnly = true)
+    public function getItems($publishedOnly = true, $limit = null)
     {
         $children = $this->children;
         $today = new \DateTime();
@@ -29,6 +29,8 @@ class NewsList extends SimplePage
             if ($child instanceof NewsItem && ($child->isPublished() || $publishedOnly == false)) {
                 $news[] = $child;
             }
+            if ($limit !== null && count($news) >= $limit)
+                break;
         }
 
         usort($news, function ($a, $b) {
