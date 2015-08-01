@@ -23,6 +23,7 @@ class NewsManager
 
     /**
      * @param $dm \Doctrine\ODM\PHPCR\DocumentManager
+     * @param $imageHelper UploadFileHelperDoctrine
      */
     public function __construct(
         \Doctrine\ODM\PHPCR\DocumentManager $dm,
