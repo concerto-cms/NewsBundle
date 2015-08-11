@@ -38,7 +38,7 @@ class NewsList extends SimplePage
                  * @var NewsItem $a
                  * @var NewsItem $b
                  */
-                return ($a->getDate() < $b->getDate()) ? -1 : 1;
+                return ($a->getDate() < $b->getDate()) ? 1 : -1;
         });
         return $news;
     }
