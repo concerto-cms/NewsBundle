@@ -29,8 +29,6 @@ class NewsList extends SimplePage
             if ($child instanceof NewsItem && ($child->isPublished() || $publishedOnly == false)) {
                 $news[] = $child;
             }
-            if ($limit !== null && count($news) >= $limit)
-                break;
         }
 
         usort($news, function ($a, $b) {
@@ -40,6 +38,9 @@ class NewsList extends SimplePage
                  */
                 return ($a->getDate() < $b->getDate()) ? 1 : -1;
         });
+        if ($limit) {
+            array_slice($news, 0, $limit, true);
+        }
         return $news;
     }
 
