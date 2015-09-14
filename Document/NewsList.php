@@ -39,7 +39,7 @@ class NewsList extends SimplePage
                 return ($a->getDate() < $b->getDate()) ? 1 : -1;
         });
         if ($limit) {
-            array_slice($news, 0, $limit, true);
+            $news = array_slice($news, 0, $limit, true);
         }
         return $news;
     }
