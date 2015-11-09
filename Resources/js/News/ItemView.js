@@ -98,7 +98,13 @@ News.ItemView = Backbone.View.extend({
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
     },
     events: {
-        "click button.save": "save"
+        "click button.save": "save",
+        "click button.delete": "delete"
+    },
+    delete: function() {
+        if (window.confirm("Are you sure?")) {
+            this.trigger("delete");
+        }
     },
     onChange: function() {
         this.$("button.save").removeAttr("disabled").removeClass("disabled");

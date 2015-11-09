@@ -36,7 +36,15 @@ _.extend(News.Controller.prototype, {
         this.listenTo(view, "save", function() {
             this.router.navigate("/", {trigger: true});
         });
-
+        this.listenTo(view, "delete", function() {
+            var url = model.url();
+            $.ajax({
+                url: url,
+                method: "DELETE"
+            });
+            page.removeItem(model);
+            this.router.navigate("/", {trigger: true});
+        });
         this.setView(view);
 
 

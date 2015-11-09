@@ -25,6 +25,11 @@ Model.NewsList = Backbone.Model.extend({
     getItem: function(slug) {
         return this.getItems().findWhere({slug: slug});
     },
+    removeItem: function(model) {
+        var items = this.getItems();
+        items.remove(model);
+        this.set("newsitems", this.newsItems.toJSON());
+    },
     getPlanned: function() {
         return this.getItems().where({planned: true});
     },
